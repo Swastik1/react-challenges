@@ -1,0 +1,39 @@
+$primary-color: #3498db;
+$background-color: #ecf0f1;
+$error-color: #e74c3c;
+
+.todo-list-container {
+    max-width: 600px;
+    margin: auto;
+
+    h1{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: large;
+        text-align: center;
+    }
+
+    .todo-form {
+        text-align: center;
+    }
+
+    .loading-message {
+        font-size: 18px;
+        color: $primary-color;
+    }
+
+    .error-message {
+        font-size: 18px;
+        color: $error-color;
+    }
+
+    ul {
+        li {
+            list-style: none;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: $background-color;
+        }
+    }
+}
