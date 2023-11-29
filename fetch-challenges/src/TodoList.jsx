@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-
+import './TodoList.scss';
 const TodoList = () => {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,16 +20,16 @@ const TodoList = () => {
         fetchData();
     },[])
     return (
-        <>
+        <div className='todo-list-container'>
             <h1>TodoList</h1>
-            {loading && <p>Loading ..</p>}
-            {error && <p>Error: {error.message }</p>}
+            {loading && <p className='loading-message'>Loading ..</p>}
+            {error && <p className='error-message'>Error: {error.message }</p>}
             <ul>
                 {todos.map(todo => (
                     <li key={todo.id}>{todo.title}</li>
                 ))}
             </ul>
-        </>
+        </div>
   )
 }
 
