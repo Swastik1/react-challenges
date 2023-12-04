@@ -16,7 +16,7 @@ const BalanceTracker = () => {
     e.preventDefault();
     const transactionAmount = parseFloat(currentBalance);
 
-    if (!isNaN) {
+    if (!isNaN(transactionAmount)) {
       const newTransaction = balance.previousBalance + transactionAmount;
       setBalance({ ...balance, previousBalance: newTransaction })
       setCurrentBalance("");
@@ -34,30 +34,34 @@ const BalanceTracker = () => {
   
   
   return (
-    <div>
+    <div className='container'>
       <h1>Transactions</h1>
       <label>Previous Day Transaction: 
         <span>{balance.previousBalance}</span>
       </label>
       <br />
+
       <label>Current Day Transaction:
         <input type="number"
           value={currentBalance}
           onChange={handleChange}
         />
-        
-      </label>
-      <br />
-      <button onClick={handleClick}>Add Transaction</button>
-      <br />
-      <label>Current Transaction:
-        <b>{transactionDetails && transactionDetails.amount}</b>
-        <br />
-        Date & Time: ({transactionDetails && transactionDetails.date})
       </label>
       <br />
 
-      <label>Total Transaction:
+      <button onClick={handleClick}>Add Transaction</button>
+      <br />
+
+      <div id='transactionDetails'>
+        <label>Current Transaction:
+        <b>{transactionDetails && transactionDetails.amount}</b>
+        <br />
+        Date & Time: ({transactionDetails && transactionDetails.date})
+        </label>
+      </div>
+      <br />
+
+      <label id='totalTransaction'>Total Transaction:
         <strong>{ balance.previousBalance}</strong>
       </label>
     </div>
