@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './App.css'
 
 const BalanceTracker = () => {
   
@@ -36,7 +37,7 @@ const BalanceTracker = () => {
   return (
     <div className='container'>
       <h1>Transactions</h1>
-      <label>Previous Day Transaction: 
+      <label><strong>Previous Day Transaction: </strong>
         <span>{balance.previousBalance}</span>
       </label>
       <br />
@@ -47,7 +48,6 @@ const BalanceTracker = () => {
           onChange={handleChange}
         />
       </label>
-      <br />
 
       <button onClick={handleClick}>Add Transaction</button>
       <br />
@@ -56,7 +56,7 @@ const BalanceTracker = () => {
         <label>Current Transaction:
         <b>{transactionDetails && transactionDetails.amount}</b>
         <br />
-        Date & Time: ({transactionDetails && transactionDetails.date})
+        Date & Time: {(transactionDetails && transactionDetails.date)}
         </label>
       </div>
       <br />
