@@ -1,71 +1,79 @@
-import React, { useState } from 'react'
-import './App.css'
+// Create JSON with {'previousDayBalance': 1000}
+// Fetch the previousDay balance from json
+// Display the previous day balance and current balance
+// Create textbox with label transaction and add button
+// if you add transaction it should update the current balance
+
+import React from 'react';
+import { useState } from 'react';
+import './App.css';
 
 const BalanceTracker = () => {
-  
   const [balance, setBalance] = useState({
-    previousBalance: 1000
-  })
-  const [currentBalance, setCurrentBalance] = useState("");
-  const [transactionDetails, setTransactionDetails] = useState(null)
-  
+    previousBalance: 1000,
+    currentBalance: 1000,
+  });
+  const [transactionInput, setTransactionInput] = useState('');
+  const [transactionDetails, setTransactionDetails] = useState(null);
+
   const handleChange = (e) => {
-    setCurrentBalance(e.target.value)
-  }
+    setTransactionInput(e.target.value);
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
-    const transactionAmount = parseFloat(currentBalance);
-
-    if (!isNaN(transactionAmount)) {
-      const newTransaction = balance.previousBalance + transactionAmount;
-      setBalance({ ...balance, previousBalance: newTransaction })
-      setCurrentBalance("");
-
-      setTransactionDetails({
-      amount: transactionAmount,
-      date: new Date().toLocaleString()
-      })
-      
-    } else {
-      alert("Please provide a valid number");
+    const transactionAmount = parseFloat(transactionInput);
+    if (isNaN(transactionAmount)) {
+      alert('Please provide a valid number for transaction');
+      return;
     }
-    
-  }
-  
-  
+
+    const newCurrentBalance = balance.previousBalance + transactionAmount;
+    setBalance({
+      ...balance,
+      currentBalance: newCurrentBalance,
+    });
+
+    setTransactionInput('');
+
+    setTransactionDetails({
+      currentAmount: transactionInput,
+    });
+  };
+
   return (
-    <div className='container'>
-      <h1>Transactions</h1>
-      <label><strong>Previous Day Transaction: </strong>
-        <span>{balance.previousBalance}</span>
-      </label>
+    <div className="container">
+      <h1>Balance Tracker</h1>
+      <label><b>Previous Balance:</b> {balance.previousBalance}</label>
       <br />
 
-      <label>Current Day Transaction:
-        <input type="number"
-          value={currentBalance}
-          onChange={handleChange}
-        />
-      </label>
-
-      <button onClick={handleClick}>Add Transaction</button>
-      <br />
-
-      <div id='transactionDetails'>
-        <label>Current Transaction:
-        <b>{transactionDetails && transactionDetails.amount}</b>
+      <div className>
+        <label>
+          <span>Current Balance Details : {balance.currentBalance}</span>
+        </label>
         <br />
-        Date & Time: {(transactionDetails && transactionDetails.date)}
+
+        <label>
+          {' '}
+          Transaction:
+          <input type="text" value={transactionInput} onChange={handleChange} />
         </label>
       </div>
-      <br />
 
-      <label id='totalTransaction'>Total Transaction:
-        <strong>{ balance.previousBalance}</strong>
-      </label>
+      <button onClick={handleClick}>Add Transaction</button>
+
+      <div>
+        <label>
+          <h3>Total Transaction Details </h3>
+          <p>
+            Current transaction:
+            {transactionDetails && transactionDetails.currentAmount}
+          </p>
+          <p>Total Balance: {balance.currentBalance} </p>
+        </label>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default BalanceTracker;

@@ -44,15 +44,10 @@ button:hover {
     background-color: #45a059;
 }
 
-#transactionDetails{
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    color: #666;
-}
 
-#totalTransaction{
+
+/* #totalTransaction{
     margin-top: 20px;
     font-weight: bold;
     color: #333;
-}
+} */
