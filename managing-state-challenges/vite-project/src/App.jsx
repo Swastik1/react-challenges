@@ -1,13 +1,14 @@
 import { useState } from "react";
 import AddItem from "./AddItem";
+import PackedItem from "./PackedItem";
 import "./App.css";
 
 let nextId = 3;
 
 const initialItem = [
   { id: 0, title: "Warm Socks", packed: true },
-  { id: 0, title: "Travel Journal", packed: false },
-  { id: 0, title: "Warm Socks", packed: false },
+  { id: 1, title: "Travel Journal", packed: false },
+  { id: 2, title: "Mixed Colors", packed: false },
 ];
 
 function App() {
@@ -27,10 +28,43 @@ function App() {
     ]);
   };
 
+  const handleChangeItem = (nextItem) => {
+    if (nextItem.packed) {
+      setPacked(packed + 1);
+    } else {
+      setPacked(packed - 1);
+    }
+
+    setItems(
+      items.map((item) => {
+        if (item.id === nextItem.id) {
+          return nextItem;
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleDeleteItem = (itemID) => {
+    setTotal(total - 1);
+    setItems(items.filter((item) => item.id !== itemID));
+    setPacked(packed - 1);
+  };
+
   return (
     <>
       <h2>Travel Plan</h2>
       <AddItem onAddItem={handleAddItem} />
+      <PackedItem
+        items={items}
+        onChangeItem={handleChangeItem}
+        onDeleteItem={handleDeleteItem}
+      />
+      <hr />
+      <b>
+        {packed} out of {total}
+      </b>
     </>
   );
 }
