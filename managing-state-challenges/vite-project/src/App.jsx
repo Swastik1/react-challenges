@@ -48,8 +48,12 @@ function App() {
 
   const handleDeleteItem = (itemID) => {
     setTotal(total - 1);
+
+    const itemToDelete = items.find((item) => item.id === itemID);
+    if (itemToDelete && itemToDelete.packed) {
+      setPacked(packed - 1);
+    }
     setItems(items.filter((item) => item.id !== itemID));
-    setPacked(packed - 1);
   };
 
   return (
